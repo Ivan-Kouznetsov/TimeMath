@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.RegularExpressions;
 using TimeMath.Models;
 using TimeMath.Services;
 
@@ -28,9 +28,9 @@ namespace TimeMath.Services
             char operand = operandInput[0];
             if (operand != Plus && operand != Minus) return null;
 
-            if (!DateTime.TryParse(parts[0], out DateTime dateTime1)) return null;
+            if (!TryParseBetter(parts[0], out DateTime dateTime1)) return null;
 
-            if (DateTime.TryParse(parts[1], out DateTime dateTime2))
+            if (TryParseBetter(parts[1], out DateTime dateTime2))
             {
                 switch (operand)
                 {
@@ -48,11 +48,35 @@ namespace TimeMath.Services
             }
             return result;
         }
-
+        
         private static string PrettifyDateTime(DateTime dateTime)
         {
             if (dateTime.Hour == 0 && dateTime.Minute == 0 && dateTime.Second == 0) return dateTime.ToLongDateString();
             return dateTime.ToLongDateString() + " " + dateTime.ToLongTimeString();
         }
+
+        private static bool TryParseBetter(string s, out DateTime dateTime)
+        {
+            dateTime = DateTime.MinValue;
+
+            if (DateTime.TryParse(s, out DateTime nativeParse))
+            {
+                Regex yearRegex = new Regex(@"\d{4}");
+                Regex threeSectionRegex = new Regex(@"\d{1,2}.{1}\d{1,2}.{1}\d{1,2}");
+                if (!yearRegex.IsMatch(s) && !threeSectionRegex.IsMatch(s))
+                {
+                    //yearless
+                    dateTime = new DateTime(DateTime.Now.Year, nativeParse.Month, nativeParse.Day, nativeParse.Hour, nativeParse.Minute, nativeParse.Second);
+                }
+                else
+                {
+                    dateTime = nativeParse;
+                }
+                return true;
+            }
+                            
+            return false;
+        }
+ 
     }
 }

@@ -12,6 +12,8 @@ namespace TimeMath
             const string prompt = "TimeMath>";
             string input;
 
+            Console.WriteLine(Properties.Resources.Introduction);
+
             while (true)
             {
                 Console.Write(prompt);
@@ -23,20 +25,19 @@ namespace TimeMath
                 }
                 else if (input.ToLower() == "examples")
                 {
-                    Console.WriteLine("Jan 1 2000 + 10 days");
-                    Console.WriteLine("Jan 1 2000 - Dec 25 1999");
-                    Console.WriteLine("2:23 - 1:11");
+                    Console.WriteLine(Properties.Resources.Examples.Replace(@"\n",Environment.NewLine));                
                 }
                 else if (input.ToLower() == "help")
                 {
-                    Console.WriteLine("Usage: DateTime +/- DateTime or DateTime span expression");
+                    Console.WriteLine(Properties.Resources.Usage.Replace(@"\n", Environment.NewLine));
                 }
                 else
                 {
-                    string response = NaturalLanguageCalculator.Calculate(input);
+                    string improvedInput = UIHelper.ApplyAllImprovemnets(input);
+                    string response = NaturalLanguageCalculator.Calculate(improvedInput);
                     if (response == null)
                     {
-                        Console.WriteLine("There is a mistake in the input. For help type 'help'. For examples type 'examples'.");
+                        Console.WriteLine(UIHelper.ExplainSyntaxError(improvedInput));
                     }
                     else
                     {

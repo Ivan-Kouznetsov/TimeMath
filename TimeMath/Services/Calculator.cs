@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.RegularExpressions;
 using TimeMath.Models;
 
 namespace TimeMath.Services
@@ -65,12 +65,8 @@ namespace TimeMath.Services
         {
             return DateTimeSpan.Subtract(dateTime1, dateTimeSpan);
         }
-        
-        /*
-        public static string MeaningfulAnswer(DateTime dateTime1, char operand, DateTime dateTime2)
-        {
 
-        }*/
+      
 
     }
 }

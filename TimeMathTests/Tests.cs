@@ -11,13 +11,21 @@ namespace TimeMathTests
         [TestMethod]
         public void DateTimeSpanParsing()
         {
-            Assert.AreEqual(new DateTimeSpan(1,10,1,1,1,1,1), DateTimeSpan.Parse("1 year 10 month 1 week 1 day 1 hour 1 minute 1 second"));
+            Assert.AreEqual(new DateTimeSpan(1,1,1,1,1,1,1), DateTimeSpan.Parse("1 year 1 month 1 week 1 day 1 hour 1 minute 1 second"));
             Assert.AreEqual(new DateTimeSpan(0,1,1,1,1,1,1), DateTimeSpan.Parse("1 month 1 week 1 day 1 hour 1 minute 1 second"));
             Assert.AreEqual(new DateTimeSpan(0,0,1,1,1,1,1), DateTimeSpan.Parse("1 week 1 day 1 hour 1 minute 1 second"));
             Assert.AreEqual(new DateTimeSpan(0,0,0,1,1,1,1), DateTimeSpan.Parse("1 day 1 hour 1 minute 1 second"));
             Assert.AreEqual(new DateTimeSpan(0,0,0,0,1,1,1), DateTimeSpan.Parse("1 hour 1 minute 1 second"));
             Assert.AreEqual(new DateTimeSpan(0,0,0,0,0,1,1), DateTimeSpan.Parse("1 minute 1 second"));
             Assert.AreEqual(new DateTimeSpan(0,0,0,0,0,0,1), DateTimeSpan.Parse("1 second"));
+
+            Assert.AreEqual(new DateTimeSpan(10, 1, 1, 1, 1, 1, 1), DateTimeSpan.Parse("10 year 1 month 1 week 1 day 1 hour 1 minute 1 second"));
+            Assert.AreEqual(new DateTimeSpan(0, 10, 1, 1, 1, 1, 1), DateTimeSpan.Parse("10 month 1 week 1 day 1 hour 1 minute 1 second"));
+            Assert.AreEqual(new DateTimeSpan(0, 0, 10, 1, 1, 1, 1), DateTimeSpan.Parse("10 week 1 day 1 hour 1 minute 1 second"));
+            Assert.AreEqual(new DateTimeSpan(0, 0, 0, 10, 1, 1, 1), DateTimeSpan.Parse("10 day 1 hour 1 minute 1 second"));
+            Assert.AreEqual(new DateTimeSpan(0, 0, 0, 0, 10, 1, 1), DateTimeSpan.Parse("10 hour 1 minute 1 second"));
+            Assert.AreEqual(new DateTimeSpan(0, 0, 0, 0, 0, 10, 1), DateTimeSpan.Parse("10 minute 1 second"));
+            Assert.AreEqual(new DateTimeSpan(0, 0, 0, 0, 0, 0, 10), DateTimeSpan.Parse("10 second"));
 
             Assert.AreEqual(new DateTimeSpan(1, 1, 1, 1, 1, 1, 1), DateTimeSpan.Parse("1year 1month 1week 1day 1hour 1minute 1second"));
             Assert.AreEqual(new DateTimeSpan(0, 1, 1, 1, 1, 1, 1), DateTimeSpan.Parse("1month 1week 1day 1hour 1minute 1second"));
