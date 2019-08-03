@@ -51,7 +51,9 @@ namespace TimeMath.Services
             if (dayDifference < 0)
             {
                 monthDifference--;
-                dayDifference = DateTime.DaysInMonth(dateTime2.Year, dateTime2.Month + monthDifference) + dayDifference;
+                int month = dateTime2.Month + monthDifference;
+                if (month > 12) month -= 12;
+                dayDifference = DateTime.DaysInMonth(dateTime2.Year, month) + dayDifference;
             }
 
             dateTimeSpan.Years = yearDifference;

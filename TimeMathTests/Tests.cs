@@ -80,6 +80,7 @@ namespace TimeMathTests
         {
             Assert.AreEqual("January 6, 2000", NaturalLanguageCalculator.Calculate("Jan 1 2000 + 5 days"));
             Assert.AreEqual("February 20, 2000", NaturalLanguageCalculator.Calculate("Jan 1 2000 + 50 days"));
+            Assert.AreEqual("28 years 10 months", NaturalLanguageCalculator.Calculate("Oct 1, 1990 - Aug 1 2019"));
         }
     }
 }
